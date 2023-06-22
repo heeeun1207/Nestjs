@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function MyComponent() {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
     fetchData();
@@ -10,7 +10,7 @@ function MyComponent() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/data');
+      const response = await axios.get('http://localhost:3001/api/data');
       setData(response.data);
     } catch (error) {
       console.error(error);
@@ -19,7 +19,7 @@ function MyComponent() {
 
   return (
     <div>
-      {data ? (
+      {data.length > 0 ? (
         <ul>
           {data.map((item: any) => (
             <li key={item.id}>{item.name}</li>
